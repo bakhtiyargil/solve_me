@@ -1,4 +1,4 @@
-package az.baxtiyargil.foodrating;
+package az.baxtiyargil.solution.foodrating;
 
 public class FoodRatings {
 

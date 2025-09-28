@@ -1,4 +1,4 @@
-package az.baxtiyargil.foodrating;
+package az.baxtiyargil.solution.foodrating;
 
 public class FoodRatingsMain {
     public static void main(String[] args) {
@@ -23,9 +23,9 @@ public class FoodRatingsMain {
 
     public static void wrong1() {
         FoodRatings foodRatings = new FoodRatings(
-                new String[]{"emgqdbo","jmvfxjohq","qnvseohnoe","yhptazyko","ocqmvmwjq"},
-                new String[]{"snaxol","snaxol","snaxol","fajbervsj","fajbervsj"},
-                new int[]{2,6,18,6,5});
+                new String[]{"emgqdbo", "jmvfxjohq", "qnvseohnoe", "yhptazyko", "ocqmvmwjq"},
+                new String[]{"snaxol", "snaxol", "snaxol", "fajbervsj", "fajbervsj"},
+                new int[]{2, 6, 18, 6, 5});
 
         foodRatings.changeRating("qnvseohnoe", 11);
         System.out.println(foodRatings.highestRated("fajbervsj"));

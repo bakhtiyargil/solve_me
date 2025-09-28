@@ -1,8 +1,8 @@
-package az.baxtiyargil;
+package az.baxtiyargil.solution.largestperimetertriangle;
 
 import java.util.Arrays;
 
-public class Main {
+public class LargestPerimeterTriangle {
 
     public static void main(String[] args) {
         int per = largestPerimeter(new int[]{2, 1, 2});
@@ -25,4 +25,3 @@ public class Main {
         return 0;
     }
 }
-
