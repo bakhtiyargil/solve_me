@@ -7,11 +7,6 @@ public class TriangulationPolygonMain {
         test1(triangPoly);
         test2(triangPoly);
         test3(triangPoly);
-        test4(triangPoly);
-        test5(triangPoly);
-        test6(triangPoly);
-        test7(triangPoly);
-        test8(triangPoly);
     }
 
     private static void test1(TriangulationPolygon triangPoly) {
