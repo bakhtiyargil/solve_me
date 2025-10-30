@@ -6,25 +6,26 @@ import java.math.RoundingMode;
 public class BuyPowerChange {
 
     private static final int months = 10;
-    private static BigDecimal buyPower = BigDecimal.ZERO;
+    private static BigDecimal boughtItem = BigDecimal.ZERO;
     private static final BigDecimal initialSalary = BigDecimal.valueOf(4346);
-    private static final BigDecimal initialInflation = BigDecimal.ONE;
+    private static BigDecimal lastPriceOfAllProduct = BigDecimal.valueOf(4346);
 
     public static void main(String[] args) {
-        System.out.println("Answer: " + buyPowerChange(initialSalary, initialInflation));
+        System.out.println("Answer: " + buyPowerChange(initialSalary, BigDecimal.ONE));
     }
 
-    public static BigDecimal buyPowerChange(BigDecimal salary, BigDecimal inflation) {
+    public static BigDecimal buyPowerChange(BigDecimal productCount, BigDecimal inflation) {
         for (int month = 1; month <= months; month++) {
-            buyPower = buyPower.add(salary.divide(inflation.divide(
-                            inflation.add(
-                                    BigDecimal.valueOf(month).divide(BigDecimal.valueOf(1000), 4, RoundingMode.HALF_EVEN)
-                            ),
-                            4,
-                            RoundingMode.HALF_EVEN),
+            lastPriceOfAllProduct = lastPriceOfAllProduct.add(
+                    lastPriceOfAllProduct.multiply(
+                            inflation.divide(BigDecimal.valueOf(months * 100), 4, RoundingMode.HALF_EVEN)
+                    ));
+            BigDecimal lastPriceOfOneProduct = lastPriceOfAllProduct.divide(productCount, 4, RoundingMode.HALF_EVEN);
+            boughtItem = boughtItem.add(initialSalary.divide(
+                    lastPriceOfOneProduct,
                     4,
                     RoundingMode.HALF_EVEN));
         }
-        return buyPower.subtract(salary.multiply(BigDecimal.valueOf(months)));
+        return productCount.multiply(BigDecimal.valueOf(months)).subtract(boughtItem);
     }
 }
