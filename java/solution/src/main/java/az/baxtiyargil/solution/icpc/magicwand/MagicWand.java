@@ -1,40 +1,41 @@
 package az.baxtiyargil.solution.icpc.magicwand;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class MagicWand {
 
-    private static final int[] integers1 = {2, 3, 1, 4};
-    private static final int[] integers2 = {3, 2, 1, 3, 4};
-    private static final int[] integers3 = {3, 7, 5, 1};
-    private static final int[] integers4 = {1000000000, 2};
-    private static final int[] integers5 = {1, 3, 5};
-    private static final int[] integers6 = {2, 5, 3, 1, 7};
-    private static final int[] integers7 = {2, 4, 8, 6};
-
     public static void main(String[] args) {
-        wandSort(integers1);
-        wandSort(integers2);
-        wandSort(integers3);
-        wandSort(integers4);
-        wandSort(integers5);
-        wandSort(integers6);
-        wandSort(integers7);
+        Scanner scanner = new Scanner(System.in);
+        var allCount = scanner.nextInt();
+        Map<Integer[][], Integer[]> toysMap = new LinkedHashMap<>();
+
+        for (int i = 0; i < allCount; i++) {
+            boolean hasOdd = false;
+            boolean hasEven = false;
+            var toySize = scanner.nextInt();
+            Integer[] arr = new Integer[toySize];
+            for (int j = 0; j < toySize; j++) {
+                var num = scanner.nextInt();
+                arr[j] = num;
+                if (num % 2 == 0) hasEven = true;
+                else hasOdd = true;
+            }
+            toysMap.put(new Integer[][]{{i}, {hasOdd && hasEven ? 1 : 0}}, arr);
+        }
+
+        toysMap.forEach((s, integers) -> {
+            wandSort(integers, s[1][0] == 1);
+            System.out.println();
+        });
     }
 
-    private static void wandSort(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i] % 2 != arr[j] % 2) {
-                    if (arr[i] > arr[j]) {
-                        var a = arr[i];
-                        var b = arr[j];
-                        arr[i] = b;
-                        arr[j] = a;
-                    }
-                }
-            }
+    private static void wandSort(Integer[] arr, boolean sort) {
+        if (sort) {
+            Arrays.sort(arr);
         }
-        System.out.println(Arrays.toString(arr));
+        Arrays.stream(arr).forEach(x -> System.out.print(x + " "));
     }
 }
