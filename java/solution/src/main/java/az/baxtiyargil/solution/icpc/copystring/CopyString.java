@@ -42,7 +42,9 @@ public class CopyString {
             StringBuilder alteredSb = new StringBuilder(rawSb.toString());
             for (int j = 1; j <= rawString.length() - 1; j++) {
                 if ((alteredSb.toString().charAt(j) != idealString.charAt(j)) ||
-                        (j + 1 < idealString.length() && alteredSb.charAt(j - 1) == idealString.charAt(j + 1))) {
+                        (j + 1 < idealString.length()
+                                && alteredSb.charAt(j - 1) == idealString.charAt(j + 1)
+                                && alteredSb.charAt(j + 1) != idealString.charAt(j + 1))) {
                     rawSb.setCharAt(j, alteredSb.charAt(j - 1));
                 }
             }
@@ -64,5 +66,6 @@ public class CopyString {
         constructAndPrint("vzvylxxmsy", "vvvvvllxxx", 3);
         constructAndPrint("acba", "aaac", 6);
         constructAndPrint("acabb", "aaaca", 7);
+        constructAndPrint("vfvpd", "vfvpp", 10);
     }
 }
