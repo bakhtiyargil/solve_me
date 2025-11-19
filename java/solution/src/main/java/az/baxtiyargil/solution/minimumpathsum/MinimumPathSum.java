@@ -11,7 +11,9 @@ public class MinimumPathSum {
 
     public static void main(String[] args) {
         int[][] dp = new int[arr.length][arr[0].length];
-        for (int[] row : dp) Arrays.fill(row, -1);
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
         System.out.println(minPathSum(arr.length - 1, arr[0].length - 1, arr, dp));
     }
 
@@ -25,10 +27,12 @@ public class MinimumPathSum {
 
         int up = Integer.MAX_VALUE;
         int left = Integer.MAX_VALUE;
-
-        if (rowIndex > 0) up = minPathSum(rowIndex - 1, columnIndex, arr, dp);
-        if (columnIndex > 0) left = minPathSum(rowIndex, columnIndex - 1, arr, dp);
-
+        if (rowIndex > 0) {
+            up = minPathSum(rowIndex - 1, columnIndex, arr, dp);
+        }
+        if (columnIndex > 0) {
+            left = minPathSum(rowIndex, columnIndex - 1, arr, dp);
+        }
         dp[rowIndex][columnIndex] = arr[rowIndex][columnIndex] + Math.min(up, left);
         return dp[rowIndex][columnIndex];
     }
