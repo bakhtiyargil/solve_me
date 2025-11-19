@@ -1,5 +1,7 @@
 package az.baxtiyargil.solution.minimumpathsum;
 
+import java.util.Arrays;
+
 public class MinimumPathSum {
 
     private static final int[][] arr = new int[][]{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}};
@@ -8,32 +10,26 @@ public class MinimumPathSum {
     private static final int[][] arr3 = new int[][]{{1, 2}, {1, 1}};
 
     public static void main(String[] args) {
-        test();
+        int[][] dp = new int[arr.length][arr[0].length];
+        for (int[] row : dp) Arrays.fill(row, -1);
+        System.out.println(minPathSum(arr.length - 1, arr[0].length - 1, arr, dp));
     }
 
-    private static int minPathSum(int rowIndex, int columnIndex, int[][] arr) {
+    private static int minPathSum(int rowIndex, int columnIndex, int[][] arr, int[][] dp) {
         if (rowIndex == 0 && columnIndex == 0) {
             return arr[0][0];
+        }
+        if (dp[rowIndex][columnIndex] != -1) {
+            return dp[rowIndex][columnIndex];
         }
 
         int up = Integer.MAX_VALUE;
         int left = Integer.MAX_VALUE;
 
-        if (rowIndex > 0) {
-            up = minPathSum(rowIndex - 1, columnIndex, arr);
-        }
+        if (rowIndex > 0) up = minPathSum(rowIndex - 1, columnIndex, arr, dp);
+        if (columnIndex > 0) left = minPathSum(rowIndex, columnIndex - 1, arr, dp);
 
-        if (columnIndex > 0) {
-            left = minPathSum(rowIndex, columnIndex - 1, arr);
-        }
-
-        return arr[rowIndex][columnIndex] + Math.min(up, left);
-    }
-
-    private static void test() {
-        System.out.println(minPathSum(arr.length - 1, arr[0].length - 1, arr));
-        System.out.println(minPathSum(arr1.length - 1, arr1[0].length - 1, arr1));
-        System.out.println(minPathSum(arr2.length - 1, arr2[0].length - 1, arr2));
-        System.out.println(minPathSum(arr3.length - 1, arr3[0].length - 1, arr3));
+        dp[rowIndex][columnIndex] = arr[rowIndex][columnIndex] + Math.min(up, left);
+        return dp[rowIndex][columnIndex];
     }
 }
